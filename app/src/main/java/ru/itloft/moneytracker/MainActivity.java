@@ -13,12 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FragmentById;
+import org.androidannotations.annotations.rest.RestService;
 
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    @RestService
+    RestClient restClient;
 
     @FragmentById(R.id.navigation_drawer)
     NavigationDrawerFragment mNavigationDrawerFragment;
@@ -26,7 +31,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @AfterViews
     void ready(){
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        register();
     }
+
+    @Background
+    void register() {
+        RegisterResult result = restClient.register("aaaa", "aaaa");
+        result.toString();
+    }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {

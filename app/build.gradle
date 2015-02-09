@@ -18,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+    }
 }
 def AAVersion = '3.2'
 dependencies {
@@ -25,6 +29,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
+    compile 'com.google.code.gson:gson:2.3'
 }
 apt {
     arguments {
