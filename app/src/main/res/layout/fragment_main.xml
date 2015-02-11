@@ -27,45 +27,5 @@ tools:context=".MyActivity">
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        >
-
-        <TextView
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="1000000"
-            android:layout_gravity="center_horizontal">
-        </TextView>
-
-        <ViewFlipper
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewFlipper"
-            android:layout_above="@+id/button"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <TextView
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:text="ВСЕГО:">
-            </TextView>
-
-
-        </ViewFlipper>
-
-
-
-    </LinearLayout>
-
-
 
 </RelativeLayout>

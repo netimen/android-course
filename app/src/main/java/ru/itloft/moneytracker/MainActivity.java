@@ -13,15 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.rest.RestService;
 
-import java.util.List;
-
-import ru.itloft.moneytracker.model.Category;
-import ru.itloft.moneytracker.model.Transaction;
-import ru.itloft.moneytracker.rest.RegisterResult;
 import ru.itloft.moneytracker.rest.RestClient;
 
 
@@ -45,7 +39,7 @@ public class MainActivity extends ActionBarActivity{
     @AfterViews
     void ready() {
 
-        testMethodForPlayingWithRestAndDB();
+       // testMethodForPlayingWithRestAndDB();
     }
 
     @AfterViews
@@ -67,8 +61,6 @@ public class MainActivity extends ActionBarActivity{
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
 
-        //initDrawer();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         selectItem(0);
@@ -77,25 +69,25 @@ public class MainActivity extends ActionBarActivity{
     }
 
 
-    @Background
-    void testMethodForPlayingWithRestAndDB() {
-        RegisterResult result = restClient.login("aaaa", "aaaa");
-        Category c = new Category("some stuff");
-        c.save();
-        final List<Category> categories = Category.getAll();
-        categories.toString();
-        Transaction t = new Transaction(c, "1111");
-        t.save();
-
-        Transaction tt = new Transaction(c, "2111");
-        tt.save();
-        final List<Transaction> transactions = Transaction.getAll();
-        transactions.toString();
-        final List<Transaction> items = c.items();
-        items.toString();
-//        TransactionsResult transactionsResult = restClient.getTransactions();
-//        transactionsResult.toString();
-    }
+//    @Background
+//    void testMethodForPlayingWithRestAndDB() {
+//        RegisterResult result = restClient.login("aaaa", "aaaa");
+//        Category c = new Category("some stuff");
+//        c.save();
+//        final List<Category> categories = Category.getAll();
+//        categories.toString();
+//        Transaction t = new Transaction(c, "1111");
+//        t.save();
+//
+//        Transaction tt = new Transaction(c, "2111");
+//        tt.save();
+//        final List<Transaction> transactions = Transaction.getAll();
+//        transactions.toString();
+//        final List<Transaction> items = c.items();
+//        items.toString();
+////        TransactionsResult transactionsResult = restClient.getTransactions();
+////        transactionsResult.toString();
+//    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
