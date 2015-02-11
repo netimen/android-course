@@ -18,6 +18,12 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FragmentById;
 import org.androidannotations.annotations.rest.RestService;
 
+import java.util.List;
+
+import ru.itloft.moneytracker.model.Transaction;
+import ru.itloft.moneytracker.rest.RegisterResult;
+import ru.itloft.moneytracker.rest.RestClient;
+
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -29,15 +35,27 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     NavigationDrawerFragment mNavigationDrawerFragment;
 
     @AfterViews
-    void ready(){
+    void ready() {
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-        register();
+        testMethodForPlayingWithRestAndDB();
     }
 
     @Background
-    void register() {
-        RegisterResult result = restClient.register("aaaa", "aaaa");
-        result.toString();
+    void testMethodForPlayingWithRestAndDB() {
+        RegisterResult result = restClient.login("aaaa", "aaaa");
+//        Category c = new Category("some stuff");
+//        c.save();
+//        final List<Category> categories = Category.getAll();
+//        categories.toString();
+        Transaction t = new Transaction("1111");
+        t.save();
+
+        Transaction tt = new Transaction("2111");
+        tt.save();
+        final List<Transaction> transactions = Transaction.getAll();
+        transactions.toString();
+//        TransactionsResult transactionsResult = restClient.getTransactions();
+//        transactionsResult.toString();
     }
 
 

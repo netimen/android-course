@@ -5,7 +5,7 @@
  * Author: Dmitry Gordeev <netimen@dreamindustries.co>
  * Date:   09.02.15
  */
-package ru.itloft.moneytracker;
+package ru.itloft.moneytracker.rest;
 
 import org.androidannotations.annotations.rest.Accept;
 import org.androidannotations.annotations.rest.Get;
@@ -17,9 +17,13 @@ import org.springframework.http.converter.json.GsonHttpMessageConverter;
 public interface RestClient {
     @Get("/transcat")
     @Accept(MediaType.APPLICATION_JSON)
-    Object getTransactions();
+    TransactionsResult getTransactions();
 
     @Get("/auth?login={login}&password={password}&register=1")
     @Accept(MediaType.APPLICATION_JSON)
     RegisterResult register(String login, String password);
+
+    @Get("/auth?login={login}&password={password}")
+    @Accept(MediaType.APPLICATION_JSON)
+    RegisterResult login(String login, String password);
 }
