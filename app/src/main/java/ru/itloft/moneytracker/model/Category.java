@@ -16,8 +16,8 @@ import java.util.List;
 
 @Table(name = "categories")
 public class Category extends Model {
-//    @Column(name = "uuid")
-//    private int uuid;
+    @Column(name = "uuid")
+    private int id;
 
     @Column(name = "title")
     private String title;
@@ -35,8 +35,9 @@ public class Category extends Model {
     }
 
     public List<Transaction> items() {
-        return getMany(Transaction.class, "Category");
+        return getMany(Transaction.class, "category");
     }
+
     public static List<Category> getAll() {
         return new Select().from(Category.class).orderBy("title ASC").execute();
     }

@@ -17,16 +17,20 @@ import java.util.List;
 
 @Table(name = "transactions")
 public class Transaction extends Model {
-//    @Column(name = "uuid")
-//    private int uuid;
+    @Column(name = "uuid")
+    private int id;
+
     @Column(name = "categoryId")
     private int categoryId;
 
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "trDate")
+    @Column(name = "timestamp")
     private Date trDate;
+
+    @Column(name = "category")
+    public Category category;
 
     /**
      * required by ActiveAndroid
@@ -35,13 +39,14 @@ public class Transaction extends Model {
 
     }
 
-    public Transaction(String comment) {
+    public Transaction(Category category, String comment) {
         trDate = new Date();
         this.comment = comment;
+        this.category = category;
     }
 
     public static List<Transaction> getAll() {
-//        return new Select().from(Transaction.class).orderBy("comment DESC").execute();
-        return new Select().from(Transaction.class).execute();
+        return new Select().from(Transaction.class).orderBy("timestamp DESC").execute();
+//        return new Select().from(Transaction.class).execute();
     }
 }
