@@ -1,8 +1,6 @@
 package ru.itloft.moneytracker;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,22 +14,21 @@ import java.util.List;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ContactViewHolder>{
 
 
+    private List<DataInfo> dataInfoList;
 
-    private List<DataInfo> contactList;
-
-    public CardAdapter(List<DataInfo> contactList) {
-        this.contactList = contactList;
+    public CardAdapter(List<DataInfo> dataInfoList) {
+        this.dataInfoList = dataInfoList;
     }
 
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return dataInfoList.size();
     }
 
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
-        DataInfo ci = contactList.get(i);
+        DataInfo ci = dataInfoList.get(i);
         contactViewHolder.cardName.setText(ci.name);
         contactViewHolder.cardDate.setText(ci.date);
         contactViewHolder.cardSum.setText(ci.sum);
@@ -49,11 +46,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ContactViewHol
     }
 
 
+    public static class ContactViewHolder extends RecyclerView.ViewHolder {
 
-
-    public static class ContactViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener  {
-
-               protected TextView cardName;
+        protected TextView cardName;
         protected TextView cardDate;
         protected TextView cardSum;
         private Context context;
@@ -66,23 +61,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ContactViewHol
             cardDate = (TextView)  itemView.findViewById(R.id.date);
             cardSum = (TextView)  itemView.findViewById(R.id.sum);
 
-        }
-
-
-        @Override
-        public void onClick(View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Важное сообщение!")
-                    .setMessage(cardName.getText().toString())
-                    .setCancelable(false)
-                    .setNegativeButton("ОК, иду на кухню",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
         }
     }
 }

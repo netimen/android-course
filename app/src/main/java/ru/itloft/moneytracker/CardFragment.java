@@ -26,7 +26,7 @@ public class CardFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         Button button = (Button) view.findViewById(R.id.button);
         int index = getArguments().getInt(ARG_MENU_INDEX);
-        switch (index){
+        switch (index) {
             case 0:
 
                 getActivity().setTitle("Траты");
@@ -42,11 +42,9 @@ public class CardFragment extends android.app.Fragment {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(),"Clicked From Траты",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Clicked From Траты", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
 
 
                 break;
@@ -66,7 +64,7 @@ public class CardFragment extends android.app.Fragment {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(),"Clicked From Катгории",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Clicked From Катгории", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -86,7 +84,7 @@ public class CardFragment extends android.app.Fragment {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(),"Clicked From Статистика",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Clicked From Статистика", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -105,11 +103,11 @@ public class CardFragment extends android.app.Fragment {
     private List<DataInfo> ProductList(int size) {
 
         List<DataInfo> result = new ArrayList<DataInfo>();
-        for (int i=1; i <= size; i++) {
+        for (int i = 1; i <= size; i++) {
             DataInfo ci = new DataInfo();
             ci.name = DataInfo.NAME_PREFIX + i;
             ci.date = DataInfo.DATE_PREFIX + i + "/02/2015";
-            ci.sum = DataInfo.SUM_PREFIX + (i*100);
+            ci.sum = DataInfo.SUM_PREFIX + (i * 100);
 
             result.add(ci);
 
@@ -121,11 +119,11 @@ public class CardFragment extends android.app.Fragment {
     private List<DataInfo> CathegoryList(int size) {
 
         List<DataInfo> result = new ArrayList<DataInfo>();
-        for (int i=1; i <= size; i++) {
+        for (int i = 1; i <= size; i++) {
             DataInfo ci = new DataInfo();
             ci.name = DataInfo.CATHEGORY_NAME_PREFIX + i;
             ci.date = DataInfo.CATHEGORY_DATE_PREFIX + i + "/02/2015";
-            ci.sum = DataInfo.CATHEGORY_SUM_PREFIX + (i*100);
+            ci.sum = DataInfo.CATHEGORY_SUM_PREFIX + (i * 100);
 
             result.add(ci);
 
@@ -137,11 +135,11 @@ public class CardFragment extends android.app.Fragment {
     private List<DataInfo> Statistic(int size) {
 
         List<DataInfo> result = new ArrayList<DataInfo>();
-        for (int i=1; i <= size; i++) {
+        for (int i = 1; i <= size; i++) {
             DataInfo ci = new DataInfo();
             ci.name = DataInfo.STATISTIC_NAME_PREFIX + i;
             ci.date = DataInfo.STATISTIC_PREFIX + i + "/02/2015";
-            ci.sum = DataInfo.STATISTIC_SUM_PREFIX + (i*100);
+            ci.sum = DataInfo.STATISTIC_SUM_PREFIX + (i * 100);
 
             result.add(ci);
 

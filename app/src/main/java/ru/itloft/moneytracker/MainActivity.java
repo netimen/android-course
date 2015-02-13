@@ -13,9 +13,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
 
+import java.util.List;
+
+import ru.itloft.moneytracker.model.Category;
+import ru.itloft.moneytracker.model.Transaction;
+import ru.itloft.moneytracker.rest.RegisterResult;
 import ru.itloft.moneytracker.rest.RestClient;
 
 
@@ -27,9 +34,8 @@ public class MainActivity extends ActionBarActivity{
 
 
     private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
+
     private ActionBarDrawerToggle drawerToggle;
-    private ListView leftDrawerList;
     private ArrayAdapter<String> navigationDrawerAdapter;
     private String[] leftSliderData;
 
@@ -39,24 +45,29 @@ public class MainActivity extends ActionBarActivity{
     @AfterViews
     void ready() {
 
-       // testMethodForPlayingWithRestAndDB();
+        // testMethodForPlayingWithRestAndDB();
     }
+
+    @ViewById(R.id.left_drawer)
+    ListView leftDrawerList;
+
+    @ViewById(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+
+
 
     @AfterViews
     void nitView() {
         leftSliderData = getResources().getStringArray(R.array.screen_array);
-        leftDrawerList = (ListView) findViewById(R.id.left_drawer);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
         navigationDrawerAdapter= new ArrayAdapter<String> (  MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         if (toolbar != null) {
-            toolbar.setTitle("Navigation Drawer");
             setSupportActionBar(toolbar);
         }
-
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
@@ -69,25 +80,25 @@ public class MainActivity extends ActionBarActivity{
     }
 
 
-//    @Background
-//    void testMethodForPlayingWithRestAndDB() {
-//        RegisterResult result = restClient.login("aaaa", "aaaa");
-//        Category c = new Category("some stuff");
-//        c.save();
-//        final List<Category> categories = Category.getAll();
-//        categories.toString();
-//        Transaction t = new Transaction(c, "1111");
-//        t.save();
-//
-//        Transaction tt = new Transaction(c, "2111");
-//        tt.save();
-//        final List<Transaction> transactions = Transaction.getAll();
-//        transactions.toString();
-//        final List<Transaction> items = c.items();
-//        items.toString();
-////        TransactionsResult transactionsResult = restClient.getTransactions();
-////        transactionsResult.toString();
-//    }
+    @Background
+    void testMethodForPlayingWithRestAndDB() {
+        RegisterResult result = restClient.login("aaaa", "aaaa");
+        Category c = new Category("some stuff");
+        c.save();
+        final List<Category> categories = Category.getAll();
+        categories.toString();
+        Transaction t = new Transaction(c, "1111");
+        t.save();
+
+        Transaction tt = new Transaction(c, "2111");
+        tt.save();
+        final List<Transaction> transactions = Transaction.getAll();
+        transactions.toString();
+        final List<Transaction> items = c.items();
+        items.toString();
+//        TransactionsResult transactionsResult = restClient.getTransactions();
+//        transactionsResult.toString();
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -103,6 +114,7 @@ public class MainActivity extends ActionBarActivity{
 
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
