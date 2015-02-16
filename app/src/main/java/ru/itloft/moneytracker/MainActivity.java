@@ -17,11 +17,13 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FragmentById;
 import org.androidannotations.annotations.rest.RestService;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
+import ru.itloft.moneytracker.rest.MessageConverter;
 import ru.itloft.moneytracker.rest.RegisterResult;
 import ru.itloft.moneytracker.rest.RestClient;
 
@@ -43,6 +45,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     @Background
     void testMethodForPlayingWithRestAndDB() {
+        final RestTemplate restTemplate = restClient.getRestTemplate();
+        restTemplate.getMessageConverters().clear();
+        restTemplate.getMessageConverters().add(new MessageConverter());
+
         RegisterResult result = restClient.login("aaaa", "aaaa");
         Category c = new Category("some stuff");
         c.save();

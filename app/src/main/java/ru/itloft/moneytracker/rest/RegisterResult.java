@@ -10,4 +10,5 @@ package ru.itloft.moneytracker.rest;
 public class RegisterResult {
     String status;
     int id;
+    String authToken;
 }
