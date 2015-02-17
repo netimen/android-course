@@ -21,18 +21,18 @@ public class MainFragment extends Fragment {
     RecyclerView recList;
 
     @AfterViews
-    void main() {
+    void ready() {
         int index = getArguments().getInt(ARG_MENU_INDEX);
         switch (index) {
             case 0:
-                getActivity().setTitle("Траты");
+                getActivity().setTitle(getString(R.string.transaction));
                 Fragment fragment = new CardFragment_();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.frag_content_frame, fragment).commit();
                 break;
 
             case 1:
-                getActivity().setTitle("Категории");
+                getActivity().setTitle(getString(R.string.cathegory));
                 Fragment listFragment = new ListFragment_();
                 FragmentManager listFragmentManager = getFragmentManager();
                 listFragmentManager.beginTransaction().replace(R.id.frag_content_frame, listFragment).commit();
@@ -40,7 +40,7 @@ public class MainFragment extends Fragment {
 
             case 2:
 
-                getActivity().setTitle("Статистика");
+                getActivity().setTitle(getString(R.string.statistic));
 
                 break;
 

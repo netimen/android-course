@@ -18,6 +18,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.rest.RestService;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,21 +43,20 @@ public class MainActivity extends ActionBarActivity {
     ListView leftDrawerList;
     @ViewById(R.id.drawerLayout)
     DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+    @ViewById(R.id.toolbar)
+    Toolbar toolbar;
+    @StringArrayRes(R.array.screen_array)
+    String[] leftSliderData;
+
+
     private ActionBarDrawerToggle drawerToggle;
     private ArrayAdapter<String> navigationDrawerAdapter;
-    private String[] leftSliderData;
+
 
     @AfterViews
     void ready() {
 
-        // testMethodForPlayingWithRestAndDB();
-    }
-
-    @AfterViews
-    void nitView() {
-        leftSliderData = getResources().getStringArray(R.array.screen_array);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        testMethodForPlayingWithRestAndDB();
 
         navigationDrawerAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);

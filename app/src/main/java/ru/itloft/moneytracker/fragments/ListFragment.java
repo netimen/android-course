@@ -13,6 +13,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringArrayRes;
 
 import ru.itloft.moneytracker.R;
 
@@ -22,16 +23,16 @@ public class ListFragment extends Fragment {
 
     @ViewById(R.id.card_listView)
     ListView listView;
+    @StringArrayRes(R.array.cathegory)
+    String values[];
 
     @Click(R.id.button)
     void alert() {
         alertDialog();
     }
 
-
     @AfterViews()
-    void mainList() {
-        String values[] = getResources().getStringArray(R.array.cathegory);
+    void ready() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.list_item, values);
         listView.setAdapter(adapter);

@@ -32,7 +32,7 @@ public class CardFragment extends Fragment {
 
     @Click(R.id.button)
     void alert() {
-        Toast.makeText(getActivity(), "Transaction", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), getString(R.string.transaction), Toast.LENGTH_LONG).show();
     }
 
     @AfterViews
@@ -41,11 +41,11 @@ public class CardFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(linearLayoutManager);
-        cardAdapter = new CardAdapter(ProductList(100));
+        cardAdapter = new CardAdapter(TransactionList(100));
         recList.setAdapter(cardAdapter);
     }
 
-    private List<DataInfo> ProductList(int size) {
+    private List<DataInfo> TransactionList(int size) {
 
         List<DataInfo> result = new ArrayList<DataInfo>();
         for (int i = 1; i <= size; i++) {
