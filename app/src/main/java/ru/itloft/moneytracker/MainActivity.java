@@ -1,6 +1,8 @@
 package ru.itloft.moneytracker;
 
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import ru.itloft.moneytracker.fragments.MainFragment;
+import ru.itloft.moneytracker.fragments.MainFragment_;
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
 import ru.itloft.moneytracker.rest.MessageConverter;
@@ -28,21 +32,20 @@ import ru.itloft.moneytracker.rest.RegisterResult;
 import ru.itloft.moneytracker.rest.RestClient;
 
 
-
 @EActivity(R.layout.activity_main)
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity {
 
-
-
-
-    private Toolbar toolbar;
-
-    private ActionBarDrawerToggle drawerToggle;
-    private ArrayAdapter<String> navigationDrawerAdapter;
-    private String[] leftSliderData;
 
     @RestService
     RestClient restClient;
+    @ViewById(R.id.left_drawer)
+    ListView leftDrawerList;
+    @ViewById(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle drawerToggle;
+    private ArrayAdapter<String> navigationDrawerAdapter;
+    private String[] leftSliderData;
 
     @AfterViews
     void ready() {
@@ -50,20 +53,12 @@ public class MainActivity extends ActionBarActivity{
         // testMethodForPlayingWithRestAndDB();
     }
 
-    @ViewById(R.id.left_drawer)
-    ListView leftDrawerList;
-
-    @ViewById(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
-
-
-
     @AfterViews
     void nitView() {
         leftSliderData = getResources().getStringArray(R.array.screen_array);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        navigationDrawerAdapter= new ArrayAdapter<String> (  MainActivity.this, R.layout.drawer_list_item, leftSliderData);
+        navigationDrawerAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -118,25 +113,15 @@ public class MainActivity extends ActionBarActivity{
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
-
     private void selectItem(int position) {
 
 
-        android.app.Fragment fragment = new CardFragment();
+        Fragment fragment = new MainFragment_();
         Bundle args = new Bundle();
-        args.putInt(CardFragment.ARG_MENU_INDEX, position);
+        args.putInt(MainFragment.ARG_MENU_INDEX, position);
         fragment.setArguments(args);
 
-        android.app.FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
 
@@ -151,6 +136,14 @@ public class MainActivity extends ActionBarActivity{
         getSupportActionBar().setTitle(title);
 
         super.setTitle(title);
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
     }
 
 }

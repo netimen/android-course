@@ -34,11 +34,11 @@ public class Category extends Model {
         this.title = title;
     }
 
-    public List<Transaction> items() {
-        return getMany(Transaction.class, "category");
-    }
-
     public static List<Category> getAll() {
         return new Select().from(Category.class).orderBy("title ASC").execute();
+    }
+
+    public List<Transaction> items() {
+        return getMany(Transaction.class, "category");
     }
 }

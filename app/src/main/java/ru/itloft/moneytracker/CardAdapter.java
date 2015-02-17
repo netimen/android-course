@@ -10,8 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 
-
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ContactViewHolder>{
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
 
     private List<DataInfo> dataInfoList;
@@ -27,26 +26,26 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ContactViewHol
     }
 
     @Override
-    public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
+    public void onBindViewHolder(CardViewHolder cardViewHolder, int i) {
         DataInfo ci = dataInfoList.get(i);
-        contactViewHolder.cardName.setText(ci.name);
-        contactViewHolder.cardDate.setText(ci.date);
-        contactViewHolder.cardSum.setText(ci.sum);
+        cardViewHolder.cardName.setText(ci.name);
+        cardViewHolder.cardDate.setText(ci.date);
+        cardViewHolder.cardSum.setText(ci.sum);
 
     }
 
     @Override
-    public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.list_item_card, viewGroup, false);
 
-        return new ContactViewHolder(itemView);
+        return new CardViewHolder(itemView);
     }
 
 
-    public static class ContactViewHolder extends RecyclerView.ViewHolder {
+    public static class CardViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView cardName;
         protected TextView cardDate;
@@ -54,12 +53,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ContactViewHol
         private Context context;
 
 
-        public ContactViewHolder(View itemView) {
+        public CardViewHolder(View itemView) {
             super(itemView);
 
-            cardName =  (TextView) itemView.findViewById(R.id.name);
-            cardDate = (TextView)  itemView.findViewById(R.id.date);
-            cardSum = (TextView)  itemView.findViewById(R.id.sum);
+            cardName = (TextView) itemView.findViewById(R.id.name);
+            cardDate = (TextView) itemView.findViewById(R.id.date);
+            cardSum = (TextView) itemView.findViewById(R.id.sum);
 
         }
     }

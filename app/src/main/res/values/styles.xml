@@ -13,4 +13,9 @@
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
+
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
 </resources>

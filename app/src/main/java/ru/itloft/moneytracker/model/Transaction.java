@@ -17,20 +17,16 @@ import java.util.List;
 
 @Table(name = "transactions")
 public class Transaction extends Model {
-    @Column(name = "uuid")
-    private int id;
-
-    @Column(name = "categoryId")
-    private int categoryId;
-
-    @Column(name = "comment")
-    private String comment;
-
-    @Column(name = "timestamp")
-    private Date trDate;
-
     @Column(name = "category")
     public Category category;
+    @Column(name = "uuid")
+    private int id;
+    @Column(name = "categoryId")
+    private int categoryId;
+    @Column(name = "comment")
+    private String comment;
+    @Column(name = "timestamp")
+    private Date trDate;
 
     /**
      * required by ActiveAndroid
