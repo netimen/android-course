@@ -23,9 +23,12 @@ import java.util.List;
 
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
+import ru.itloft.moneytracker.rest.AuthenticatorInterceptor;
 import ru.itloft.moneytracker.rest.MessageConverter;
 import ru.itloft.moneytracker.rest.RegisterResult;
 import ru.itloft.moneytracker.rest.RestClient;
+import ru.itloft.moneytracker.rest.Result;
+import ru.itloft.moneytracker.rest.TransactionsResult;
 
 
 @EActivity(R.layout.activity_main)
@@ -50,6 +53,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         restTemplate.getMessageConverters().add(new MessageConverter());
 
         RegisterResult result = restClient.login("aaaa", "aaaa");
+        AuthenticatorInterceptor.authToken = result.authToken;
         Category c = new Category("some stuff");
         c.save();
         final List<Category> categories = Category.getAll();
@@ -63,8 +67,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         transactions.toString();
         final List<Transaction> items = c.items();
         items.toString();
-//        TransactionsResult transactionsResult = restClient.getTransactions();
-//        transactionsResult.toString();
+        final Result ccc = restClient.addCategory("ccc");
+        TransactionsResult transactionsResult = restClient.getTransactions();
+        transactionsResult.toString();
     }
 
 
