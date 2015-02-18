@@ -13,7 +13,6 @@ import ru.itloft.moneytracker.rest.TransactionsResult;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
-
     private List<TransactionsResult> transactionsResults;
 
     public CardAdapter(List<TransactionsResult> transactionsResults) {
@@ -29,22 +28,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public void onBindViewHolder(CardViewHolder cardViewHolder, int i) {
         TransactionsResult tr = transactionsResults.get(i);
-        cardViewHolder.name.setText(tr.name);
-        cardViewHolder.date.setText(tr.date);
-        cardViewHolder.sum.setText(tr.sum);
-
+        //cardViewHolder.name.setText(tr.name);
+        //cardViewHolder.date.setText(tr.date);
+        //cardViewHolder.sum.setText(tr.sum);
     }
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.list_item_card, viewGroup, false);
 
         return new CardViewHolder(itemView);
     }
-
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,7 +55,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             name = (TextView) itemView.findViewById(R.id.name);
             date = (TextView) itemView.findViewById(R.id.date);
             sum = (TextView) itemView.findViewById(R.id.sum);
-
         }
     }
 }

@@ -14,8 +14,8 @@ import ru.itloft.moneytracker.R;
 
 @EFragment(R.layout.fragment_main)
 public class MainFragment extends Fragment {
-    public static final String ARG_MENU_INDEX = "index";
 
+    public static final String ARG_MENU_INDEX = "index";
 
     @ViewById(R.id.cardList)
     RecyclerView recList;
@@ -32,7 +32,7 @@ public class MainFragment extends Fragment {
                 break;
 
             case 1:
-                getActivity().setTitle(getString(R.string.cathegory));
+                getActivity().setTitle(getString(R.string.category));
                 Fragment listFragment = new ListFragment_();
                 FragmentManager listFragmentManager = getFragmentManager();
                 listFragmentManager.beginTransaction().replace(R.id.frag_content_frame, listFragment).commit();

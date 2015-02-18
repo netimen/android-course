@@ -39,28 +39,27 @@ import ru.itloft.moneytracker.rest.TransactionsResult;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity {
 
-
-    @RestService
-    RestClient restClient;
-    @ViewById(R.id.left_drawer)
-    ListView leftDrawerList;
-    @ViewById(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
-    @ViewById(R.id.toolbar)
-    Toolbar toolbar;
-    @StringArrayRes(R.array.screen_array)
-    String[] leftSliderData;
-
-
     private ActionBarDrawerToggle drawerToggle;
     private ArrayAdapter<String> navigationDrawerAdapter;
 
+    @RestService
+    RestClient restClient;
+
+    @ViewById(R.id.left_drawer)
+    ListView leftDrawerList;
+
+    @ViewById(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+
+    @ViewById(R.id.toolbar)
+    Toolbar toolbar;
+
+    @StringArrayRes(R.array.screen_array)
+    String[] leftSliderData;
 
     @AfterViews
     void ready() {
-
         testMethodForPlayingWithRestAndDB();
-
         navigationDrawerAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -68,15 +67,12 @@ public class MainActivity extends ActionBarActivity {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
-
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         selectItem(0);
-
-
     }
 
 
@@ -119,16 +115,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void selectItem(int position) {
-
-
         Fragment fragment = new MainFragment_();
         Bundle args = new Bundle();
         args.putInt(MainFragment.ARG_MENU_INDEX, position);
         fragment.setArguments(args);
-
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
 
         leftDrawerList.setItemChecked(position, true);
         setTitle(leftSliderData[position]);
@@ -137,7 +129,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-
         getSupportActionBar().setTitle(title);
 
         super.setTitle(title);

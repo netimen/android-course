@@ -18,6 +18,7 @@ import ru.itloft.moneytracker.R;
 
 @EFragment(R.layout.card_fragment)
 public class CardFragment extends Fragment {
+
     CardAdapter cardAdapter;
 
     @ViewById(R.id.cardList)

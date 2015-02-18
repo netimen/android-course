@@ -7,19 +7,19 @@
         <item>Статистика</item>
     </string-array>
 
-    <string-array name="cathegory">
-        <item>Продукты</item>
+    <string-array name="category">
+    <item>Продукты</item>
         <item>Развления</item>
         <item>Другое</item>
     </string-array>
 
     <string name="action_example">Example action</string>
-    <string name="add_the_cathegory">Добавьте категорию</string>
+    <string name="add_the_category">Добавьте категорию</string>
     <string name="ok">ОК</string>
     <string name="CANCEL">ОТМЕНА</string>
 
     <string name="action_settings">Settings</string>
     <string name="transaction">Траты</string>
-    <string name="cathegory">Категории</string>
+    <string name="category">Категории</string>
     <string name="statistic">Статистика</string>
 </resources>

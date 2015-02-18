@@ -23,7 +23,8 @@ public class ListFragment extends Fragment {
 
     @ViewById(R.id.card_listView)
     ListView listView;
-    @StringArrayRes(R.array.cathegory)
+
+    @StringArrayRes(R.array.category)
     String values[];
 
     @Click(R.id.button)
@@ -38,10 +39,9 @@ public class ListFragment extends Fragment {
         listView.setAdapter(adapter);
     }
 
-
     private void alertDialog() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setTitle(getString(R.string.add_the_cathegory));
+        alert.setTitle(getString(R.string.add_the_category));
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
