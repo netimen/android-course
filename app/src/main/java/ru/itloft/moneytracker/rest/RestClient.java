@@ -9,15 +9,24 @@ package ru.itloft.moneytracker.rest;
 
 import org.androidannotations.annotations.rest.Accept;
 import org.androidannotations.annotations.rest.Get;
+import org.androidannotations.annotations.rest.Post;
 import org.androidannotations.annotations.rest.Rest;
 import org.androidannotations.api.rest.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-@Rest(converters = {MessageConverter.class}, interceptors = {HttpBasicAuthenticatorInterceptor.class}, rootUrl = "http://62.109.17.114/")
+@Rest(converters = {MessageConverter.class}, interceptors = {AuthenticatorInterceptor.class}, rootUrl = "http://62.109.17.114/")
 public interface RestClient {
     @Get("/transcat")
     @Accept(MediaType.APPLICATION_JSON)
     TransactionsResult getTransactions();
+
+    @Get("/categories")
+    @Accept(MediaType.APPLICATION_JSON)
+    CategoriesResult getCategories();
+
+    @Post("/categories/add?title={title}")
+    @Accept(MediaType.APPLICATION_JSON)
+    Result addCategory(String title);
 
     @Get("/auth?login={login}&password={password}&register=1")
     @Accept(MediaType.APPLICATION_JSON)
