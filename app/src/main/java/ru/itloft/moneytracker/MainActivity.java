@@ -1,26 +1,31 @@
 package ru.itloft.moneytracker;
 
-import android.app.Activity;
+
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.FragmentById;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.rest.RestService;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import ru.itloft.moneytracker.fragments.MainFragment;
+import ru.itloft.moneytracker.fragments.MainFragment_;
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
 import ru.itloft.moneytracker.rest.AuthenticatorInterceptor;
@@ -32,19 +37,44 @@ import ru.itloft.moneytracker.rest.TransactionsResult;
 
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity {
+
+    private ActionBarDrawerToggle drawerToggle;
+    private ArrayAdapter<String> navigationDrawerAdapter;
 
     @RestService
     RestClient restClient;
 
-    @FragmentById(R.id.navigation_drawer)
-    NavigationDrawerFragment mNavigationDrawerFragment;
+    @ViewById(R.id.left_drawer)
+    ListView leftDrawerList;
+
+    @ViewById(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+
+    @ViewById(R.id.toolbar)
+    Toolbar toolbar;
+
+    @StringArrayRes(R.array.screen_array)
+    String[] leftSliderData;
 
     @AfterViews
     void ready() {
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
         testMethodForPlayingWithRestAndDB();
+        navigationDrawerAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
+        leftDrawerList.setAdapter(navigationDrawerAdapter);
+        leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        drawerLayout.setDrawerListener(drawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        selectItem(0);
     }
+
 
     @Background
     void testMethodForPlayingWithRestAndDB() {
@@ -72,86 +102,48 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         transactionsResult.toString();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void onSectionAttached(int number) {
-//        switch (number) {
-//            case 1:
-//                mTitle = getString(R.string.title_section1);
-//                break;
-//            case 2:
-//                mTitle = getString(R.string.title_section2);
-//                break;
-//            case 3:
-//                mTitle = getString(R.string.title_section3);
-//                break;
-//        }
-    }
+    private void selectItem(int position) {
+        Fragment fragment = new MainFragment_();
+        Bundle args = new Bundle();
+        args.putInt(MainFragment.ARG_MENU_INDEX, position);
+        fragment.setArguments(args);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-//        actionBar.setTitle(mTitle);
+        leftDrawerList.setItemChecked(position, true);
+        setTitle(leftSliderData[position]);
+        drawerLayout.closeDrawer(leftDrawerList);
     }
-
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
+
+        super.setTitle(title);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
         }
     }
 
 }
+
+
+
+

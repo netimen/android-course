@@ -12,4 +12,5 @@ import java.util.ArrayList;
 import ru.itloft.moneytracker.model.Category;
 
 public class TransactionsResult extends ArrayList<Category>{
+
 }
