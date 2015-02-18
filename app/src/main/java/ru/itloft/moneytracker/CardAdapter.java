@@ -8,28 +8,30 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ru.itloft.moneytracker.rest.TransactionsResult;
+
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
 
-    private List<DataInfo> dataInfoList;
+    private List<TransactionsResult> transactionsResults;
 
-    public CardAdapter(List<DataInfo> dataInfoList) {
-        this.dataInfoList = dataInfoList;
+    public CardAdapter(List<TransactionsResult> transactionsResults) {
+        this.transactionsResults = transactionsResults;
     }
 
 
     @Override
     public int getItemCount() {
-        return dataInfoList.size();
+        return transactionsResults.size();
     }
 
     @Override
     public void onBindViewHolder(CardViewHolder cardViewHolder, int i) {
-        DataInfo ci = dataInfoList.get(i);
-        cardViewHolder.name.setText(ci.name);
-        cardViewHolder.date.setText(ci.date);
-        cardViewHolder.sum.setText(ci.sum);
+        TransactionsResult tr = transactionsResults.get(i);
+        cardViewHolder.name.setText(tr.name);
+        cardViewHolder.date.setText(tr.date);
+        cardViewHolder.sum.setText(tr.sum);
 
     }
 

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.itloft.moneytracker.CardAdapter;
-import ru.itloft.moneytracker.DataInfo;
 import ru.itloft.moneytracker.R;
+import ru.itloft.moneytracker.rest.TransactionsResult;
 
 
 @EFragment(R.layout.card_fragment)
@@ -45,14 +45,14 @@ public class CardFragment extends Fragment {
         recList.setAdapter(cardAdapter);
     }
 
-    private List<DataInfo> TransactionList(int size) {
+    private List<TransactionsResult> TransactionList(int size) {
 
-        List<DataInfo> result = new ArrayList<DataInfo>();
+        List<TransactionsResult> result = new ArrayList<TransactionsResult>();
         for (int i = 1; i <= size; i++) {
-            DataInfo ci = new DataInfo();
-            ci.name = DataInfo.NAME_PREFIX + i;
-            ci.date = DataInfo.DATE_PREFIX + i + "/02/2015";
-            ci.sum = DataInfo.SUM_PREFIX + (i * 100);
+            TransactionsResult ci = new TransactionsResult();
+            ci.name = TransactionsResult.NAME_PREFIX + i;
+            ci.date = TransactionsResult.DATE_PREFIX + i + "/02/2015";
+            ci.sum = TransactionsResult.SUM_PREFIX + (i * 100);
 
             result.add(ci);
 
