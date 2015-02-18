@@ -14,11 +14,16 @@ import org.springframework.http.client.ClientHttpResponse;
 
 import java.io.IOException;
 
-public class HttpBasicAuthenticatorInterceptor implements ClientHttpRequestInterceptor {
+public class AuthenticatorInterceptor implements ClientHttpRequestInterceptor {
+
+    /**
+     * temp solution TODO
+     */
+    public static String authToken;
+
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] data, ClientHttpRequestExecution execution) throws IOException {
-        // do something
-//        request.getURI().
+        request.getHeaders().add("authToken", authToken);
         return execution.execute(request, data);
     }
 }
