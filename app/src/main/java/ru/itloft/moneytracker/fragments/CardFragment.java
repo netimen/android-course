@@ -12,8 +12,13 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import ru.itloft.moneytracker.CardAdapter;
 import ru.itloft.moneytracker.R;
+import ru.itloft.moneytracker.model.Transaction;
 
 
 @EFragment(R.layout.card_fragment)
@@ -34,27 +39,25 @@ public class CardFragment extends Fragment {
 
     @AfterViews
     void main() {
+        List<Transaction> data = getTestData();
         recList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(linearLayoutManager);
-//        cardAdapter = new CardAdapter(TransactionList(100));
-//        recList.setAdapter(cardAdapter);
+        cardAdapter = new CardAdapter(data);
+        recList.setAdapter(cardAdapter);
     }
 
-//    private List<TransactionsResult> TransactionList(int size) {
-//
-//        List<TransactionsResult> result = new ArrayList<TransactionsResult>();
-//        for (int i = 1; i <= size; i++) {
-//            TransactionsResult ci = new TransactionsResult();
-//            ci.name = TransactionsResult.NAME_PREFIX + i;
-//            ci.date = TransactionsResult.DATE_PREFIX + i + "/02/2015";
-//            ci.sum = TransactionsResult.SUM_PREFIX + (i * 100);
-//
-//            result.add(ci);
-//
-//        }
-//
-//        return result;
-//    }
+    private List<Transaction> getTestData() {
+        List<Transaction> data = new ArrayList<Transaction>();
+        data.add(new Transaction("Телефон", 150, new Date()));
+        data.add(new Transaction("Еда", 75, new Date()));
+        data.add(new Transaction("Книга Война и Мир", 300, new Date()));
+        data.add(new Transaction("Телефон", 150, new Date()));
+        data.add(new Transaction("Телефон", 150, new Date()));
+        data.add(new Transaction("Телефон", 150, new Date()));
+        data.add(new Transaction("Телефон", 150, new Date()));
+
+        return data;
+    }
 }

@@ -1,6 +1,7 @@
 package ru.itloft.moneytracker;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ru.itloft.moneytracker.rest.TransactionsResult;
+import ru.itloft.moneytracker.model.Transaction;
 
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
-    private List<TransactionsResult> transactionsResults;
+    private List<Transaction> transactionsResults;
 
-    public CardAdapter(List<TransactionsResult> transactionsResults) {
+    public CardAdapter(List<Transaction> transactionsResults) {
         this.transactionsResults = transactionsResults;
     }
 
@@ -27,10 +28,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public void onBindViewHolder(CardViewHolder cardViewHolder, int i) {
-        TransactionsResult tr = transactionsResults.get(i);
-        //cardViewHolder.name.setText(tr.name);
-        //cardViewHolder.date.setText(tr.date);
-        //cardViewHolder.sum.setText(tr.sum);
+        Transaction tr = transactionsResults.get(i);
+        String currentDateTimeString = (String) DateFormat.format("dd-MM-yyyy", tr.trDate);
+
+        cardViewHolder.name.setText(tr.comment);
+        cardViewHolder.date.setText(currentDateTimeString);
+        cardViewHolder.sum.setText(Integer.toString(tr.sum));
     }
 
     @Override
@@ -47,7 +50,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         protected TextView name;
         protected TextView date;
         protected TextView sum;
-
 
         public CardViewHolder(View itemView) {
             super(itemView);

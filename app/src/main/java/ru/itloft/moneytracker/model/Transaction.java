@@ -24,15 +24,24 @@ public class Transaction extends Model {
     @Column(name = "categoryId")
     private int categoryId;
     @Column(name = "comment")
-    private String comment;
+    public String comment;
     @Column(name = "timestamp")
-    private Date trDate;
+    public Date trDate;
+    @Column(name = "sum")
+    public int sum;
+
 
     /**
      * required by ActiveAndroid
      */
     public Transaction() {
 
+    }
+
+    public Transaction(String comment, int sum, Date date) {
+        this.trDate = date;
+        this.sum = sum;
+        this.comment = comment;
     }
 
     public Transaction(Category category, String comment) {
