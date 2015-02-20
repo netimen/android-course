@@ -47,6 +47,10 @@
         <item name="android:background">@drawable/android_app_back</item>
     </style>
 
+    <style name="Container.Main">
+        <item name="android:background">@drawable/android_app_back_main</item>
+    </style>
+
     <style name="Text" parent="@android:style/TextAppearance" />
 
     <style name="Edit" parent="Text">
@@ -61,6 +65,13 @@
         <item name="android:background">@drawable/button_bg</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
 </resources>

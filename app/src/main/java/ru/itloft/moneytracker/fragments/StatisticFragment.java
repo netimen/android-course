@@ -21,19 +21,17 @@ public class StatisticFragment extends android.app.Fragment {
     @AfterViews
     void ready() {
 
-        num1 = 122;
-        num2 = 133;
-        num3 = 144;
-        num4 = 111;
-        num5 = 121;
-
-
+        num1 = 750;
+        num2 = 300;
+        num3 = 75;
         webView.addJavascriptInterface(new WebAppInterface(), "Android");
-
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDefaultTextEncodingName("utf-8");
+
         webView.loadUrl("file:///android_asset/chart.html");
+
     }
 
     private class WebAppInterface {

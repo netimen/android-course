@@ -4,6 +4,7 @@ package ru.itloft.moneytracker.fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.view.ContextThemeWrapper;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,7 +41,7 @@ public class ListFragment extends Fragment {
     }
 
     private void alertDialog() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder alert = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.AlertDialogCustom));
         alert.setTitle(getString(R.string.add_the_category));
         final EditText input = new EditText(getActivity());
         alert.setView(input);
