@@ -2,7 +2,6 @@ package ru.itloft.moneytracker;
 
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -24,8 +23,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import ru.itloft.moneytracker.fragments.MainFragment;
-import ru.itloft.moneytracker.fragments.MainFragment_;
+import ru.itloft.moneytracker.fragments.CardFragment_;
+import ru.itloft.moneytracker.fragments.ListFragment_;
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
 import ru.itloft.moneytracker.rest.AuthenticatorInterceptor;
@@ -40,7 +39,6 @@ import ru.itloft.moneytracker.rest.TransactionsResult;
 public class MainActivity extends ActionBarActivity {
 
     private ActionBarDrawerToggle drawerToggle;
-    private ArrayAdapter<String> navigationDrawerAdapter;
 
     @RestService
     RestClient restClient;
@@ -59,8 +57,9 @@ public class MainActivity extends ActionBarActivity {
 
     @AfterViews
     void ready() {
+        LoginActivity_.intent(this).start();
         testMethodForPlayingWithRestAndDB();
-        navigationDrawerAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
+        ArrayAdapter<String> navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -115,16 +114,22 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void selectItem(int position) {
-        Fragment fragment = new MainFragment_();
-        Bundle args = new Bundle();
-        args.putInt(MainFragment.ARG_MENU_INDEX, position);
-        fragment.setArguments(args);
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
+        switch (position) {
+            case 0:
+                chooseSection(R.string.transaction, CardFragment_.builder().build());
+                break;
+            case 1:
+                chooseSection(R.string.category, ListFragment_.builder().build());
+                break;
+        }
         leftDrawerList.setItemChecked(position, true);
         setTitle(leftSliderData[position]);
         drawerLayout.closeDrawer(leftDrawerList);
+    }
+
+    private void chooseSection(int titleId, Fragment fragment) {
+        setTitle(getString(titleId));
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
     @Override
