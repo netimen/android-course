@@ -39,7 +39,6 @@ import ru.itloft.moneytracker.rest.TransactionsResult;
 public class MainActivity extends ActionBarActivity {
 
     private ActionBarDrawerToggle drawerToggle;
-    private ArrayAdapter<String> navigationDrawerAdapter;
 
     @RestService
     RestClient restClient;
@@ -58,8 +57,9 @@ public class MainActivity extends ActionBarActivity {
 
     @AfterViews
     void ready() {
+        LoginActivity_.intent(this).start();
         testMethodForPlayingWithRestAndDB();
-        navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
+        ArrayAdapter<String> navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
