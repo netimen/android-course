@@ -7,4 +7,5 @@
     <color name="background">#FEFEFE</color>
     <color name="button_text">#636363</color>
     <color name="bg_pressed">#DADADA</color>
+    <!--<color name="hint">#EAEAEA</color>-->
 </resources>
