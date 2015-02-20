@@ -1,10 +1,8 @@
 package ru.itloft.moneytracker.fragments;
 
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -18,7 +16,6 @@ import ru.itloft.moneytracker.R;
 public class MainFragment extends Fragment {
 
     public static final String ARG_MENU_INDEX = "index";
-    private FragmentActivity myContext;
 
     @ViewById(R.id.cardList)
     RecyclerView recList;
@@ -44,9 +41,7 @@ public class MainFragment extends Fragment {
             case 2:
 
                 getActivity().setTitle(getString(R.string.statistic));
-                Fragment statFragment = new StatisticFragment_();
-                FragmentManager statFragmentManager = getFragmentManager();
-                statFragmentManager.beginTransaction().replace(R.id.frag_content_frame, statFragment).commit();
+
                 break;
 
             default:
@@ -54,13 +49,5 @@ public class MainFragment extends Fragment {
                 break;
 
         }
-
-
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        myContext = (FragmentActivity) activity;
-        super.onAttach(activity);
     }
 }
