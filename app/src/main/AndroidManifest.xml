@@ -11,7 +11,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/myAppTheme" >
+        android:theme="@style/LoftTheme" >
         
         <meta-data android:name="AA_DB_NAME" android:value="transactions.db" />
         <meta-data android:name="AA_DB_VERSION" android:value="5" />
@@ -19,6 +19,7 @@
         
         <activity
             android:name=".MainActivity_"
+            android:theme="@style/LoftTheme.Main"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,7 @@
         </activity>
         <activity
             android:name=".LoginActivity_"
+            android:theme="@style/LoftTheme.Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
