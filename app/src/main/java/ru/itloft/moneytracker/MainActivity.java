@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
@@ -23,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import ru.itloft.moneytracker.auth.SessionManager;
 import ru.itloft.moneytracker.fragments.CardFragment_;
 import ru.itloft.moneytracker.fragments.ListFragment_;
 import ru.itloft.moneytracker.model.Category;
@@ -55,9 +57,12 @@ public class MainActivity extends ActionBarActivity {
     @StringArrayRes(R.array.screen_array)
     String[] leftSliderData;
 
+    @Bean
+    SessionManager sessionManager;
+
     @AfterViews
     void ready() {
-        LoginActivity_.intent(this).start();
+        sessionManager.login(this);
         testMethodForPlayingWithRestAndDB();
         ArrayAdapter<String> navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
