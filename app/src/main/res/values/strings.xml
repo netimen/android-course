@@ -22,4 +22,7 @@
     <string name="transaction">Траты</string>
     <string name="category">Категории</string>
     <string name="statistic">Статистика</string>
+    <string name="enter">Войти</string>
+    <string name="login_hint">Логин</string>
+    <string name="password_hint">Пароль</string>
 </resources>

@@ -1,11 +1,22 @@
 <resources>
 
-    <style name="myAppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">#1A9C56</item>
-        <item name="colorPrimaryDark">#157E46</item>
-        <item name="colorAccent">#1A9C56</item>
+    <style name="LoftTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimaryDark">@color/green_dark</item>
+        <item name="colorAccent">@color/green</item>
+        <item name="colorPrimary">@color/green</item>
 
+    </style>
 
+    <style name="LoftTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/green_dark</item>
+        <item name="colorAccent">@color/green</item>
+        <item name="colorPrimary">@color/green</item>
+
+    </style>
+
+    <style name="LoftTheme.Login" parent="LoftTheme.Light" />
+
+    <style name="LoftTheme.Main" parent="LoftTheme">
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
@@ -18,4 +29,38 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:background">@android:color/white</item>
     </style>
+
+    <style name="Space">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="Container">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Container.Dark">
+        <item name="android:background">@drawable/android_app_back</item>
+    </style>
+
+    <style name="Text" parent="@android:style/TextAppearance" />
+
+    <style name="Edit" parent="Text">
+        <item name="android:textColor">@color/green</item>
+        <!--<item name="android:textColorHint">@color/hint</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
