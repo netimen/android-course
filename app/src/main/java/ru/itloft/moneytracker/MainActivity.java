@@ -62,9 +62,6 @@ public class MainActivity extends ActionBarActivity {
 
     @AfterViews
     void ready() {
-        sessionManager.logout();
-        sessionManager.login(this);
-        testMethodForPlayingWithRestAndDB();
         ArrayAdapter<String> navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -80,6 +77,12 @@ public class MainActivity extends ActionBarActivity {
         selectItem(0);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sessionManager.login(this);
+        testMethodForPlayingWithRestAndDB();
+    }
 
     @Background
     void testMethodForPlayingWithRestAndDB() {

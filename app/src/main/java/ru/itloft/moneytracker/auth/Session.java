@@ -13,6 +13,7 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 @SharedPref(value = SharedPref.Scope.UNIQUE)
 public interface Session {
 
+    // TODO remove this class
     String authToken();
 
     String user();

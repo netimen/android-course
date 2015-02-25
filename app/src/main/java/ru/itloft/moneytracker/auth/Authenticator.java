@@ -33,14 +33,9 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws NetworkErrorException {
-
         final Bundle bundle = new Bundle();
         Account[] accounts = AccountManager.get(context).getAccountsByType(SessionManager.AUTH_ACCOUNT_TYPE);
-        if (accounts.length > 0) {
-            accounts.toString();
-//            bundle.putInt(AccountManager.KEY_ERROR_CODE, SyncStateContract.Constants.ERROR_CODE_ADD_ACCOUNT_FAILED);
-//            bundle.putString(AccountManager.KEY_ERROR_MESSAGE, Constants.ERROR_MESSAGE_ADD_ACCOUNT_FAILED);
-        } else {
+        if (accounts.length == 0) {
             Intent intent;
             intent = LoginActivity_.intent(context).get();
 
@@ -60,7 +55,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
-        return null;
+        return new Bundle(); // TODO get auth token
     }
 
     @Override

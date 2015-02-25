@@ -17,7 +17,7 @@ import java.io.IOException;
 public class AuthenticatorInterceptor implements ClientHttpRequestInterceptor {
 
     /**
-     * temp solution TODO
+     * TODO temp solution
      */
     public static String authToken;
 

@@ -10,6 +10,8 @@ package ru.itloft.moneytracker.auth;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,7 +20,11 @@ import android.util.Log;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.SupposeBackground;
 import org.androidannotations.annotations.SystemService;
+import org.androidannotations.annotations.UiThread;
+
+import java.io.IOException;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class SessionManager {
@@ -33,105 +39,97 @@ public class SessionManager {
 
     @RootContext
     Context context;
-//    @Pref
-//    Session_ session;
 
-    private String mToken;
-    private boolean mIsOpen;
-
-    @Background
-    public void restore() {
-        synchronized (this) { // Android Annotations don't allow to write like this: public synchronized void restore()
-//            if (blockingRestore()) {
-//                onSessionOpen();
-//            } else {
-//                onSessionClose();
-//            }
-        }
-    }
-    /**
-     * @return if session is opened (if user is logged in)
-     */
-    public boolean blockingRestore() {
-        if (mIsOpen) {
-            return true;
-        }
-
-        try {
-            android.accounts.Account[] availableAccounts = accountManager.getAccountsByType(AUTH_ACCOUNT_TYPE);
-            Log.d(LOG_TAG, "restore(), Available accounts: " + availableAccounts.length);
-
-            if (availableAccounts.length == 0)
-                throw new Exception("No account");
-
-            Account account = availableAccounts[0];
-
-            Log.d(LOG_TAG, "restore(), Check account: " + account);
-            AccountManagerFuture<Bundle> future = accountManager.getAuthToken(availableAccounts[0], AUTH_TOKEN_TYPE_FULL_ACCESS, null, false, null, null);
-            Bundle bundle = future.getResult();
-            String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-
-            if (authToken == null)
-                throw new Exception("No auth token");
-
-            return openSessionWithBundle(bundle);
-        } catch (Exception e) {
-            return false;
-        }
-    }
+    private String authToken;
+    private boolean isOpen;
 
     public Bundle open(String login, String token) {
         Account account = new Account(login, AUTH_ACCOUNT_TYPE);
 
-        Bundle userData = new Bundle();
         final Bundle result = new Bundle();
-        if (accountManager.addAccountExplicitly(account, null, userData)) {
+        if (accountManager.addAccountExplicitly(account, null, null)) {
             result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
             result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
             result.putString(AccountManager.KEY_AUTHTOKEN, token);
             accountManager.setAuthToken(account, AUTH_TOKEN_TYPE_FULL_ACCESS, token);
 
-            openSessionWithBundle(result);
 //            ContentResolver.setSyncAutomatically(account, Constants.CONTENT_AUTHORITY, true);
 
-//            onSessionOpen();
-        } else {
-//            result.putString(AccountManager.KEY_ERROR_MESSAGE, context.getString(R.string.account_already_exists));
+            onSessionOpen(result);
         }
 
         return result;
     }
-    boolean openSessionWithBundle(Bundle bundle) {
-        mToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-        mIsOpen = true;
 
-//        String storedToken = session.authToken().get();
-//        if (!TextUtils.equals(storedToken, mToken))
-//            session.authToken().put(mToken);
-
-        return true;
-    }
-
+    /**
+     * must be called from bg thread, because AccountManagerFuture can't be used in main thread
+     */
     @Background
     public void login(Activity activity) {
-        if (mIsOpen)
+        if (isOpen)
+            return;
+
+        if (restore())
             return;
 
         try {
             AccountManagerFuture<Bundle> future = accountManager.addAccount(AUTH_ACCOUNT_TYPE, AUTH_TOKEN_TYPE_FULL_ACCESS, null, null, activity, null, null);
             future.getResult();
-        } catch (Exception e) {
+        } catch (OperationCanceledException | AuthenticatorException | IOException e) {
+            e.printStackTrace();
             Log.d(LOG_TAG, "login(), Failed: " + e);
         }
     }
 
     public void logout() {
-        Account[] accounts = accountManager.getAccountsByType(AUTH_ACCOUNT_TYPE);
-        for (Account account : accounts) {
-            Log.d(LOG_TAG, "removeAccounts(), Will remove account: " + account);
+        for (Account account : accountManager.getAccountsByType(AUTH_ACCOUNT_TYPE))
             accountManager.removeAccount(account, null, null);
-        }
 
-//        onSessionClose();
+        onSessionClose();
     }
+
+    /**
+     * must be called from bg thread, because AccountManagerFuture can't be used in main thread
+     */
+    @SupposeBackground
+    boolean restore() {
+        try {
+            android.accounts.Account[] availableAccounts = accountManager.getAccountsByType(AUTH_ACCOUNT_TYPE);
+            Log.d(LOG_TAG, "restore(), Available accounts: " + availableAccounts.length);
+
+            if (availableAccounts.length == 0)
+                return false;
+
+            AccountManagerFuture<Bundle> future = accountManager.getAuthToken(availableAccounts[0], AUTH_TOKEN_TYPE_FULL_ACCESS, null, false, null, null);
+            onSessionOpen(future.getResult());
+            return true;
+        } catch (OperationCanceledException | IOException | AuthenticatorException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @UiThread(propagation = UiThread.Propagation.REUSE)
+    void onSessionOpen(Bundle bundle) {
+        authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
+        isOpen = true;
+
+//        String storedToken = session.authToken().get();
+//        if (!TextUtils.equals(storedToken, mToken))
+//            session.authToken().put(mToken);
+
+//        if (!mSynced)
+//            sync(true);
+//
+//        LocalBroadcastManager.getInstance(context)
+//                .sendBroadcast(new Intent(SESSION_OPENED_BROADCAST));
+    }
+
+    @UiThread(propagation = UiThread.Propagation.REUSE)
+    void onSessionClose() {
+        isOpen = false;
+        authToken = null;
+//        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(SESSION_CLOSED_BROADCAST));
+    }
+
 }
