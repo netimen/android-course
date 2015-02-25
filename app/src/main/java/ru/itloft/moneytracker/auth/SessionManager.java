@@ -124,4 +124,14 @@ public class SessionManager {
             Log.d(LOG_TAG, "login(), Failed: " + e);
         }
     }
+
+    public void logout() {
+        Account[] accounts = accountManager.getAccountsByType(AUTH_ACCOUNT_TYPE);
+        for (Account account : accounts) {
+            Log.d(LOG_TAG, "removeAccounts(), Will remove account: " + account);
+            accountManager.removeAccount(account, null, null);
+        }
+
+//        onSessionClose();
+    }
 }

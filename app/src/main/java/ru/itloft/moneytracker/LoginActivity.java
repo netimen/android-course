@@ -11,15 +11,21 @@ import android.text.TextUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.TextChange;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.rest.RestService;
 
 import ru.itloft.moneytracker.auth.SessionManager;
+import ru.itloft.moneytracker.rest.RegisterResult;
+import ru.itloft.moneytracker.rest.RestClient;
 
 @EActivity(R.layout.login)
 public class LoginActivity extends AuthenticatorActivity {
@@ -32,10 +38,12 @@ public class LoginActivity extends AuthenticatorActivity {
     @Bean
     SessionManager sessionManager;
 
+    @RestService
+    RestClient restClient;
+
     @Click
     void enter() {
-        setAccountAuthenticatorResult(sessionManager.open("aaaa", "sfdsf"));
-        finish();
+        enterAsync();
     }
 
     @TextChange({R.id.login, R.id.password})
@@ -46,6 +54,23 @@ public class LoginActivity extends AuthenticatorActivity {
     @EditorAction(R.id.password)
     void passwordEntered(int actionId) {
         if (actionId == EditorInfo.IME_ACTION_DONE && enter.isEnabled()) enter();
+    }
+
+    ///
+
+    @Background
+    void enterAsync() { // TODO network error
+        RegisterResult result = restClient.login(login.getText(), password.getText());
+        handleLoginResult(result);
+    }
+
+    @UiThread
+    void handleLoginResult(RegisterResult result) { // TODO activity death
+        if (TextUtils.equals(result.status, "success")) {
+            setAccountAuthenticatorResult(sessionManager.open(login.getText().toString(), result.authToken));
+            finish();
+        } else
+            Toast.makeText(this, result.status, Toast.LENGTH_LONG).show();
     }
 
 }

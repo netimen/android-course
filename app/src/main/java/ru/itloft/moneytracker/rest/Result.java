@@ -9,5 +9,5 @@ package ru.itloft.moneytracker.rest;
 
 @SuppressWarnings("UnusedDeclaration")
 public class Result {
-    String status;
+    public String status;
 }

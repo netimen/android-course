@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
 
     @AfterViews
     void ready() {
+        sessionManager.logout();
         sessionManager.login(this);
         testMethodForPlayingWithRestAndDB();
         ArrayAdapter<String> navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
@@ -82,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Background
     void testMethodForPlayingWithRestAndDB() {
-        final RestTemplate restTemplate = restClient.getRestTemplate();
+        final RestTemplate restTemplate = restClient.getRestTemplate(); // TODO move somewhere
         restTemplate.getMessageConverters().clear();
         restTemplate.getMessageConverters().add(new MessageConverter());
 
