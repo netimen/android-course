@@ -8,12 +8,14 @@
 package ru.itloft.moneytracker;
 
 import android.text.TextUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
@@ -27,7 +29,6 @@ public class LoginActivity extends AuthenticatorActivity {
     @ViewById
     EditText login, password;
 
-    // TODO make return button switch between edits
     @Bean
     SessionManager sessionManager;
 
@@ -40,6 +41,11 @@ public class LoginActivity extends AuthenticatorActivity {
     @TextChange({R.id.login, R.id.password})
     void credentialsChanged() {
         enter.setEnabled(!TextUtils.isEmpty(login.getText()) && !TextUtils.isEmpty(password.getText()));
+    }
+
+    @EditorAction(R.id.password)
+    void passwordEntered(int actionId) {
+        if (actionId == EditorInfo.IME_ACTION_DONE && enter.isEnabled()) enter();
     }
 
 }
