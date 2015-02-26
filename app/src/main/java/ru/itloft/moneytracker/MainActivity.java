@@ -18,6 +18,7 @@ import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Receiver;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 
@@ -78,9 +79,13 @@ public class MainActivity extends ActionBarActivity {
         sessionManager.login(this);
     }
 
+    @Receiver(actions = SessionManager.SESSION_OPENED_BROADCAST, registerAt = Receiver.RegisterAt.OnResumeOnPause, local = true)
+    void onSessionOpen() {
+        testMethodForPlayingWithRestAndDB();
+    }
+
     @Background
     void testMethodForPlayingWithRestAndDB() {
-
         Category c = new Category("some stuff");
         c.save();
         final List<Category> categories = Category.getAll();

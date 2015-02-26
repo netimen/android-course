@@ -14,7 +14,9 @@ import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import org.androidannotations.annotations.Background;
@@ -33,6 +35,8 @@ public class SessionManager {
 
     public static final String AUTH_ACCOUNT_TYPE = "ru.itloft.moneytracker";
     public static final String AUTH_TOKEN_TYPE_FULL_ACCESS = AUTH_ACCOUNT_TYPE + ".tokenFullAccess";
+    public static final String SESSION_OPENED_BROADCAST = "session_open";
+    public static final String SESSION_CLOSED_BROADCAST = "session_closed";
 
     @SystemService
     AccountManager accountManager;
@@ -121,15 +125,14 @@ public class SessionManager {
 //        if (!mSynced)
 //            sync(true);
 //
-//        LocalBroadcastManager.getInstance(context)
-//                .sendBroadcast(new Intent(SESSION_OPENED_BROADCAST));
+        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(SESSION_OPENED_BROADCAST));
     }
 
     @UiThread(propagation = UiThread.Propagation.REUSE)
     void onSessionClose() {
         isOpen = false;
         authToken = null;
-//        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(SESSION_CLOSED_BROADCAST));
+        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(SESSION_CLOSED_BROADCAST));
     }
 
     public String getAuthToken() {

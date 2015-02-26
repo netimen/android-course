@@ -63,14 +63,6 @@ public class Authenticator extends AbstractAccountAuthenticator {
             result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
             result.putString(AccountManager.KEY_AUTHTOKEN, authToken);
         }
-//        } else {
-//            final Intent intent = new Intent(mContext, LoginActivity_.class);
-//            intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//            intent.putExtra(Constants.AUTH_TOKEN_TYPE_FULL_ACCESS, authTokenType);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//            final Bundle bundle = new Bundle();
-//            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//        }
         return result;
     }
 
