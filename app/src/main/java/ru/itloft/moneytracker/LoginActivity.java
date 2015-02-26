@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -21,14 +22,13 @@ import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.rest.RestService;
 
 import ru.itloft.moneytracker.auth.SessionManager;
 import ru.itloft.moneytracker.rest.RegisterResult;
-import ru.itloft.moneytracker.rest.RestClient;
 
 @EActivity(R.layout.login)
 public class LoginActivity extends AuthenticatorActivity {
+
     @ViewById
     Button enter;
 
@@ -38,8 +38,8 @@ public class LoginActivity extends AuthenticatorActivity {
     @Bean
     SessionManager sessionManager;
 
-    @RestService
-    RestClient restClient;
+    @App
+    LoftApplication app;
 
     @Click
     void enter() {
@@ -60,7 +60,7 @@ public class LoginActivity extends AuthenticatorActivity {
 
     @Background
     void enterAsync() { // TODO network error
-        RegisterResult result = restClient.login(login.getText(), password.getText());
+        RegisterResult result = app.restClient.login(login.getText(), password.getText());
         handleLoginResult(result);
     }
 

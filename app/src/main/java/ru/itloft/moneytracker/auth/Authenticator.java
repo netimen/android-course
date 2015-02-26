@@ -15,6 +15,7 @@ import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import ru.itloft.moneytracker.LoginActivity_;
 
@@ -55,7 +56,22 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
-        return new Bundle(); // TODO get auth token
+        final Bundle result = new Bundle();
+        String authToken = AccountManager.get(context).peekAuthToken(account, authTokenType);
+        if (!TextUtils.isEmpty(authToken)) {
+            result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
+            result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
+            result.putString(AccountManager.KEY_AUTHTOKEN, authToken);
+        }
+//        } else {
+//            final Intent intent = new Intent(mContext, LoginActivity_.class);
+//            intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//            intent.putExtra(Constants.AUTH_TOKEN_TYPE_FULL_ACCESS, authTokenType);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            final Bundle bundle = new Bundle();
+//            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        }
+        return result;
     }
 
     @Override

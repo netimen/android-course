@@ -132,4 +132,7 @@ public class SessionManager {
 //        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(SESSION_CLOSED_BROADCAST));
     }
 
+    public String getAuthToken() {
+        return authToken;
+    }
 }

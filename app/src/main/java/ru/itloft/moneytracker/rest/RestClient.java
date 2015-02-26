@@ -14,7 +14,7 @@ import org.androidannotations.annotations.rest.Rest;
 import org.androidannotations.api.rest.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-@Rest(converters = {MessageConverter.class}, interceptors = {AuthenticatorInterceptor.class}, rootUrl = "http://62.109.17.114/")
+@Rest(converters = {MessageConverter.class},  rootUrl = "http://62.109.17.114/")
 public interface RestClient {
     @Get("/transcat")
     @Accept(MediaType.APPLICATION_JSON)
