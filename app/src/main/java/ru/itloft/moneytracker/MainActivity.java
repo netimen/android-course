@@ -14,23 +14,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Receiver;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
-import org.androidannotations.annotations.rest.RestService;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import ru.itloft.moneytracker.auth.SessionManager;
 import ru.itloft.moneytracker.fragments.CardFragment_;
 import ru.itloft.moneytracker.fragments.ListFragment_;
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
-import ru.itloft.moneytracker.rest.AuthenticatorInterceptor;
-import ru.itloft.moneytracker.rest.MessageConverter;
-import ru.itloft.moneytracker.rest.RegisterResult;
-import ru.itloft.moneytracker.rest.RestClient;
 import ru.itloft.moneytracker.rest.Result;
 import ru.itloft.moneytracker.rest.TransactionsResult;
 
@@ -40,8 +38,8 @@ public class MainActivity extends ActionBarActivity {
 
     private ActionBarDrawerToggle drawerToggle;
 
-    @RestService
-    RestClient restClient;
+    @App
+    LoftApplication app;
 
     @ViewById(R.id.left_drawer)
     ListView leftDrawerList;
@@ -55,10 +53,11 @@ public class MainActivity extends ActionBarActivity {
     @StringArrayRes(R.array.screen_array)
     String[] leftSliderData;
 
+    @Bean
+    SessionManager sessionManager;
+
     @AfterViews
     void ready() {
-        LoginActivity_.intent(this).start();
-        testMethodForPlayingWithRestAndDB();
         ArrayAdapter<String> navigationDrawerAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.drawer_list_item, leftSliderData);
         leftDrawerList.setAdapter(navigationDrawerAdapter);
         leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -74,15 +73,19 @@ public class MainActivity extends ActionBarActivity {
         selectItem(0);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sessionManager.login(this);
+    }
+
+    @Receiver(actions = SessionManager.SESSION_OPENED_BROADCAST, registerAt = Receiver.RegisterAt.OnResumeOnPause, local = true)
+    void onSessionOpen() {
+        testMethodForPlayingWithRestAndDB();
+    }
 
     @Background
     void testMethodForPlayingWithRestAndDB() {
-        final RestTemplate restTemplate = restClient.getRestTemplate();
-        restTemplate.getMessageConverters().clear();
-        restTemplate.getMessageConverters().add(new MessageConverter());
-
-        RegisterResult result = restClient.login("aaaa", "aaaa");
-        AuthenticatorInterceptor.authToken = result.authToken;
         Category c = new Category("some stuff");
         c.save();
         final List<Category> categories = Category.getAll();
@@ -96,8 +99,8 @@ public class MainActivity extends ActionBarActivity {
         transactions.toString();
         final List<Transaction> items = c.items();
         items.toString();
-        final Result ccc = restClient.addCategory("ccc");
-        TransactionsResult transactionsResult = restClient.getTransactions();
+        final Result ccc = app.restClient.addCategory("ccc");
+        TransactionsResult transactionsResult = app.restClient.getTransactions();
         transactionsResult.toString();
     }
 

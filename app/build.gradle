@@ -27,6 +27,7 @@ android {
         exclude 'META-INF/license.txt'
     }
 }
+
 def AAVersion = '3.2'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -52,7 +53,7 @@ apt {
         // resourcePackageName android.defaultConfig.packageName
 
         // You can set optional annotation processing options here, like these commented options:
-        // logLevel 'INFO'
+        logLevel 'WARN'
         // logFile '/var/log/aa.log'
     }
 }

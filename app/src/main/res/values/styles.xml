@@ -50,6 +50,7 @@
     <style name="Text" parent="@android:style/TextAppearance" />
 
     <style name="Edit" parent="Text">
+        <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/green</item>
         <!--<item name="android:textColorHint">@color/hint</item>-->
         <item name="android:layout_width">match_parent</item>

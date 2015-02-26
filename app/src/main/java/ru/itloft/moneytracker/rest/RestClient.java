@@ -14,7 +14,7 @@ import org.androidannotations.annotations.rest.Rest;
 import org.androidannotations.api.rest.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-@Rest(converters = {MessageConverter.class}, interceptors = {AuthenticatorInterceptor.class}, rootUrl = "http://62.109.17.114/")
+@Rest(converters = {MessageConverter.class},  rootUrl = "http://62.109.17.114/")
 public interface RestClient {
     @Get("/transcat")
     @Accept(MediaType.APPLICATION_JSON)
@@ -30,11 +30,11 @@ public interface RestClient {
 
     @Get("/auth?login={login}&password={password}&register=1")
     @Accept(MediaType.APPLICATION_JSON)
-    RegisterResult register(String login, String password);
+    RegisterResult register(CharSequence login, CharSequence password);
 
     @Get("/auth?login={login}&password={password}")
     @Accept(MediaType.APPLICATION_JSON)
-    RegisterResult login(String login, String password);
+    RegisterResult login(CharSequence login, CharSequence password);
 
     RestTemplate getRestTemplate();
 
