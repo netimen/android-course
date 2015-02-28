@@ -7,42 +7,42 @@
     <Space style="@style/Space" />
 
     <ImageView
-        android:src="@drawable/android_app_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/android_app_logo"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/background"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_large"
         android:paddingLeft="@dimen/padding_medium"
         android:paddingRight="@dimen/padding_medium"
-        android:paddingTop="@dimen/padding_large"
-        android:paddingBottom="@dimen/padding_large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:paddingTop="@dimen/padding_large">
 
         <EditText
             android:id="@+id/login"
-            android:hint="@string/login_hint"
-            style="@style/Edit" />
+            style="@style/Edit"
+            android:hint="@string/login_hint" />
 
         <EditText
             android:id="@+id/password"
+            style="@style/Edit"
             android:layout_marginTop="@dimen/padding_medium"
             android:hint="@string/password_hint"
-            android:inputType="textPassword"
-            style="@style/Edit" />
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <Button
         android:id="@+id/enter"
-        android:text="@string/enter"
+        style="@style/Button"
         android:layout_margin="@dimen/padding_large"
+        android:enabled="false"
         android:paddingLeft="@dimen/padding_xlarge"
         android:paddingRight="@dimen/padding_xlarge"
-        android:enabled="false"
-        style="@style/Button"/>
+        android:text="@string/enter" />
 
     <Space style="@style/Space" />
 

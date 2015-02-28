@@ -1,5 +1,17 @@
 package ru.itloft.moneytracker.fragments;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
+import ru.itloft.moneytracker.CardAdapter;
+import ru.itloft.moneytracker.R;
+import ru.itloft.moneytracker.model.Transaction;
 
 import android.app.Dialog;
 import android.app.Fragment;
@@ -11,21 +23,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import ru.itloft.moneytracker.CardAdapter;
-import ru.itloft.moneytracker.R;
-import ru.itloft.moneytracker.model.Transaction;
-
 
 @EFragment(R.layout.card_fragment)
 public class CardFragment extends Fragment {
@@ -54,7 +51,6 @@ public class CardFragment extends Fragment {
         cardAdapter = new CardAdapter(data);
         recList.setAdapter(cardAdapter);
 
-
     }
 
     private List<Transaction> getTestData() {
@@ -79,13 +75,13 @@ public class CardFragment extends Fragment {
         Button okButton = (Button) dialog.findViewById(R.id.okButton);
         Button cancelButton = (Button) dialog.findViewById(R.id.cancelButton);
 
-        textView.setText("Добавьте трату");
+        textView.setText(getString(R.string.add_trans));
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Editable text = editText.getText();
                 Editable textSum = editTextSum.getText();
-                if (!TextUtils.isEmpty(text) && !TextUtils.isEmpty(textSum)){
+                if (!TextUtils.isEmpty(text) && !TextUtils.isEmpty(textSum)) {
                     data.add(new Transaction(text.toString(), Integer.parseInt(textSum.toString()), new Date()));
                     cardAdapter.notifyDataSetChanged();
                     dialog.dismiss();
@@ -93,7 +89,7 @@ public class CardFragment extends Fragment {
             }
         });
 
-        cancelButton.setOnClickListener( new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();

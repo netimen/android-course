@@ -4,34 +4,34 @@
     style="@style/Container.Dark">
 
     <LinearLayout
-        android:background="@color/background"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="vertical">
 
         <ListView
             android:id="@+id/card_listView"
-            android:listSelector="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:cacheColorHint="@android:color/transparent"
             android:divider="#7F7F7F"
             android:dividerHeight="0.4dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:listSelector="@android:color/transparent" />
     </LinearLayout>
 
     <Button
-        android:layout_width="60dp"
         android:id="@+id/button"
+        android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="42dp"
+        android:layout_marginRight="42dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:text="+"
-        android:textSize="20dp"
         android:textColor="#fff"
-        android:layout_marginBottom="42dp"
-        android:layout_marginRight="42dp"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textSize="20dp" />
 </RelativeLayout>

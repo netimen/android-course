@@ -25,11 +25,6 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="CustomDialog" parent="android:Theme.Dialog">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:background">@android:color/white</item>
-    </style>
-
     <style name="Space">
         <item name="android:layout_weight">1</item>
         <item name="android:layout_width">match_parent</item>

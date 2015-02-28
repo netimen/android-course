@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/cardView"
-        card_view:cardCornerRadius="6dp"
-        card_view:cardBackgroundColor="#F7F7F7"
         android:layout_margin="5dp"
-        android:layout_marginBottom="7dp">
+        android:layout_marginBottom="7dp"
+        card_view:cardBackgroundColor="#F7F7F7"
+        card_view:cardCornerRadius="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:background="@color/background"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_marginLeft="10dp"
                     android:text="Название"
                     android:textColor="#7F7F7F"
-                    android:textSize="16dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#7F7F7F"
-                    android:textSize="12dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Дата" />
+                    android:text="Дата"
+                    android:textColor="#7F7F7F"
+                    android:textSize="12dp" />
 
             </LinearLayout>
 
@@ -51,12 +51,12 @@
                 android:id="@+id/sum"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="16dp"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
+                android:text="Сумма"
                 android:textColor="#7F7F7F"
-                android:text="Сумма" />
+                android:textSize="16dp" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

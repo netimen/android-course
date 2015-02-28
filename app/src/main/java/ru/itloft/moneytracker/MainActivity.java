@@ -1,17 +1,6 @@
 package ru.itloft.moneytracker;
 
-
-import android.app.Fragment;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import java.util.List;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -20,8 +9,6 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.rest.RestService;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 import ru.itloft.moneytracker.fragments.CardFragment_;
 import ru.itloft.moneytracker.fragments.ListFragment_;
@@ -35,6 +22,17 @@ import ru.itloft.moneytracker.rest.RestClient;
 import ru.itloft.moneytracker.rest.Result;
 import ru.itloft.moneytracker.rest.TransactionsResult;
 
+import android.app.Fragment;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity {
@@ -74,7 +72,6 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         selectItem(0);
     }
-
 
     @Background
     void testMethodForPlayingWithRestAndDB() {
@@ -152,7 +149,3 @@ public class MainActivity extends ActionBarActivity {
     }
 
 }
-
-
-
-

@@ -13,36 +13,40 @@
     android:paddingLeft="@dimen/padding_medium"
     android:paddingRight="@dimen/padding_medium"
     android:paddingTop="@dimen/padding_medium">
-    <LinearLayout
+
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/green"
-        android:textSize="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="Название:"
-        android:textColor="#7F7F7F"
-        />
-    <EditText
-        android:id="@+id/edittextName"
-        style="@style/Edit"
-        android:hint="Хлеб, зал, кофта и т.д." />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="Cумма:"
-        android:textColor="#7F7F7F"
-        />
-    <EditText
-        android:id="@+id/edittextSum"
-        style="@style/Edit"
-        android:hint="500" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Название:"
+            android:textColor="#7F7F7F" />
+
+        <EditText
+            android:id="@+id/edittextName"
+            style="@style/Edit"
+            android:hint="Хлеб, зал, кофта и т.д." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Cумма:"
+            android:textColor="#7F7F7F" />
+
+        <EditText
+            android:id="@+id/edittextSum"
+            style="@style/Edit"
+            android:hint="500" />
     </LinearLayout>
 
     <RelativeLayout
@@ -50,25 +54,24 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:background="@color/background"
             android:id="@+id/cancelButton"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:text="ОТМЕНА"
-            android:textColor="#7F7F7F"
-            />
+            android:textColor="#7F7F7F" />
 
         <Button
 
             android:id="@+id/okButton"
-            android:background="@color/background"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="right"
+            android:background="@color/background"
             android:text="ОК"
-            android:textColor="#7F7F7F"/>
+            android:textColor="#7F7F7F" />
     </RelativeLayout>
 </LinearLayout>

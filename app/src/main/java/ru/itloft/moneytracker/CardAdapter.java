@@ -1,16 +1,15 @@
 package ru.itloft.moneytracker;
 
+import java.util.List;
+
+import ru.itloft.moneytracker.model.Transaction;
+
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.List;
-
-import ru.itloft.moneytracker.model.Transaction;
-
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
@@ -19,7 +18,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public CardAdapter(List<Transaction> transactions) {
         this.transactions = transactions;
     }
-
 
     @Override
     public int getItemCount() {
@@ -38,9 +36,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.
-                from(viewGroup.getContext()).
-                inflate(R.layout.list_item_card, viewGroup, false);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_card, viewGroup, false);
 
         return new CardViewHolder(itemView);
     }
@@ -60,7 +56,3 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         }
     }
 }
-
-
-
-

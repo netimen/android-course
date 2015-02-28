@@ -25,4 +25,6 @@
     <string name="enter">Войти</string>
     <string name="login_hint">Логин</string>
     <string name="password_hint">Пароль</string>
+    <string name="add_trans">Добавьте трату</string>
+    <string name="add_category">Введите категорию</string>
 </resources>
