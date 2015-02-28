@@ -14,21 +14,21 @@ import ru.itloft.moneytracker.model.Transaction;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
-    private List<Transaction> transactionsResults;
+    private List<Transaction> transactions;
 
-    public CardAdapter(List<Transaction> transactionsResults) {
-        this.transactionsResults = transactionsResults;
+    public CardAdapter(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
 
     @Override
     public int getItemCount() {
-        return transactionsResults.size();
+        return transactions.size();
     }
 
     @Override
     public void onBindViewHolder(CardViewHolder cardViewHolder, int i) {
-        Transaction tr = transactionsResults.get(i);
+        Transaction tr = transactions.get(i);
         String currentDateTimeString = (String) DateFormat.format("dd-MM-yyyy", tr.trDate);
 
         cardViewHolder.name.setText(tr.comment);

@@ -1,10 +1,16 @@
 package ru.itloft.moneytracker.fragments;
 
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
@@ -25,6 +31,7 @@ import ru.itloft.moneytracker.model.Transaction;
 public class CardFragment extends Fragment {
 
     CardAdapter cardAdapter;
+    List<Transaction> data = new ArrayList<Transaction>();
 
     @ViewById(R.id.cardList)
     RecyclerView recList;
@@ -34,7 +41,7 @@ public class CardFragment extends Fragment {
 
     @Click(R.id.button)
     void alert() {
-        Toast.makeText(getActivity(), getString(R.string.transaction), Toast.LENGTH_LONG).show();
+        alertDialog();
     }
 
     @AfterViews
@@ -46,18 +53,53 @@ public class CardFragment extends Fragment {
         recList.setLayoutManager(linearLayoutManager);
         cardAdapter = new CardAdapter(data);
         recList.setAdapter(cardAdapter);
+
+
     }
 
     private List<Transaction> getTestData() {
-        List<Transaction> data = new ArrayList<Transaction>();
+
         data.add(new Transaction("Телефон", 150, new Date()));
         data.add(new Transaction("Еда", 75, new Date()));
         data.add(new Transaction("Книга Война и Мир", 300, new Date()));
-        data.add(new Transaction("Телефон", 150, new Date()));
-        data.add(new Transaction("Телефон", 150, new Date()));
-        data.add(new Transaction("Телефон", 150, new Date()));
-        data.add(new Transaction("Телефон", 150, new Date()));
+        data.add(new Transaction("Обои", 320, new Date()));
+        data.add(new Transaction("Фитнес", 500, new Date()));
+        data.add(new Transaction("Джинсы", 2000, new Date()));
+        data.add(new Transaction("Проезд", 200, new Date()));
 
         return data;
+    }
+
+    private void alertDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_window_trans);
+        TextView textView = (TextView) dialog.findViewById(R.id.title);
+        final EditText editText = (EditText) dialog.findViewById(R.id.edittextName);
+        final EditText editTextSum = (EditText) dialog.findViewById(R.id.edittextSum);
+        Button okButton = (Button) dialog.findViewById(R.id.okButton);
+        Button cancelButton = (Button) dialog.findViewById(R.id.cancelButton);
+
+        textView.setText("Добавьте трату");
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Editable text = editText.getText();
+                Editable textSum = editTextSum.getText();
+                if (!TextUtils.isEmpty(text) && !TextUtils.isEmpty(textSum)){
+                    data.add(new Transaction(text.toString(), Integer.parseInt(textSum.toString()), new Date()));
+                    cardAdapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        cancelButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
     }
 }

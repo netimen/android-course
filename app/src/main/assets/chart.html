@@ -8,19 +8,18 @@
 
         var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
-        ['Item 1', Android.getNum1()],
-        ['Item 2', Android.getNum2()],
-        ['Item 3', Android.getNum3()],
-        ['Item 4', Android.getNum4()],
-        ['Item 5', Android.getNum5()]
+        ['Телефон', Android.getNum1()],
+        ['Книга Война и Мир', Android.getNum2()],
+        ['Еда', Android.getNum3()],
         ]);
 
         var options = {
           pieHole: 0.5,
           pieSliceTextStyle: {
-            color: 'black',
+            color: 'white',
           },
-          legend: 'none'
+          legend: 'top',
+          colors: ['#e0440e', '#e6693e', '#ec8f6e']
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
