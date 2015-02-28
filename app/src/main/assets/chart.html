@@ -1,0 +1,34 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['Телефон', Android.getNum1()],
+        ['Книга Война и Мир', Android.getNum2()],
+        ['Еда', Android.getNum3()],
+        ]);
+
+        var options = {
+          pieHole: 0.5,
+          pieSliceTextStyle: {
+            color: 'white',
+          },
+          legend: 'top',
+          colors: ['#e0440e', '#e6693e', '#ec8f6e']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+        chart.draw(data, options);
+      }
+
+    </script>
+</head>
+<body>
+<div id="donut_single" style="width: auto; height: 1000;"></div>
+</body>
+</html>

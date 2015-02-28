@@ -47,6 +47,10 @@
         <item name="android:background">@drawable/android_app_back</item>
     </style>
 
+    <style name="Container.Main">
+        <item name="android:background">@drawable/android_app_back_main</item>
+    </style>
+
     <style name="Text" parent="@android:style/TextAppearance" />
 
     <style name="Edit" parent="Text">

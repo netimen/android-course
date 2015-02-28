@@ -27,6 +27,7 @@ import java.util.List;
 import ru.itloft.moneytracker.auth.SessionManager;
 import ru.itloft.moneytracker.fragments.CardFragment_;
 import ru.itloft.moneytracker.fragments.ListFragment_;
+import ru.itloft.moneytracker.fragments.StatisticFragment_;
 import ru.itloft.moneytracker.model.Category;
 import ru.itloft.moneytracker.model.Transaction;
 import ru.itloft.moneytracker.rest.Result;
@@ -123,6 +124,9 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 1:
                 chooseSection(R.string.category, ListFragment_.builder().build());
+                break;
+            case 2:
+                chooseSection(R.string.statistic, StatisticFragment_.builder().build());
                 break;
         }
         leftDrawerList.setItemChecked(position, true);
