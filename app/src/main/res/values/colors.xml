@@ -4,7 +4,7 @@
     <color name="cardview_initial_background">#71C3DE</color>
     <color name="bkg_card">#8C9EFF</color>
     <color name="green_dark">#157E46</color>
-    <color name="background">#FEFEFE</color>
+    <color name="background">#F7F7F7</color>
     <color name="button_text">#636363</color>
     <color name="bg_pressed">#DADADA</color>
     <!--<color name="hint">#EAEAEA</color>-->

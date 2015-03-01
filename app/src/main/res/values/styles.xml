@@ -62,4 +62,24 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="RoundButton">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/round_button</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginBottom">106dp</item>
+        <item name="android:layout_marginRight">52dp</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:text">+</item>
+        <item name="android:textSize">20dp</item>
+   </style>
+
+    <style name="DrawerView">
+     <item name="android:layout_width">match_parent</item>
+     <item name="android:layout_height">match_parent</item>
+     <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

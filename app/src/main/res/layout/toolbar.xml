@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="wrap_content"
-    android:background="#1A9C56"
+    android:background="@color/green"
     android:minHeight="?attr/actionBarSize"
 
     >
