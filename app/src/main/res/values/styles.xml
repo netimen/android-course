@@ -82,4 +82,27 @@
      <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="DialogButtonCancel">
+
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:text">ОТМЕНА</item>
+        <item name="android:textColor">#7F7F7F</item>
+
+    </style>
+
+    <style name="DialogButtonOk">
+
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:text">ОК</item>
+        <item name="android:textColor">#7F7F7F</item>
+
+    </style>
+
 </resources>

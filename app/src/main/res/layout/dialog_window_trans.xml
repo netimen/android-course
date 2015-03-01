@@ -55,7 +55,7 @@
 
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="123dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@color/background"
             android:text="ОТМЕНА"
@@ -64,7 +64,7 @@
         <Button
 
             android:id="@+id/okButton"
-            android:layout_width="156dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
