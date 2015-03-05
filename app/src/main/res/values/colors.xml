@@ -7,5 +7,6 @@
     <color name="background">#F7F7F7</color>
     <color name="button_text">#636363</color>
     <color name="bg_pressed">#DADADA</color>
+    <color name="main_text">#7F7F7F</color>
     <!--<color name="hint">#EAEAEA</color>-->
 </resources>

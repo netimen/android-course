@@ -1,11 +1,3 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:duplicateParentState="true"
-    android:gravity="center_vertical"
-    android:minHeight="?attr/listPreferredItemHeightSmall"
-    android:paddingLeft="@dimen/padding_medium"
-    android:paddingRight="@dimen/padding_medium"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@drawable/text_selector" />
+    android:id="@+id/drawer_text"
+    style="@style/DrawerListText" />

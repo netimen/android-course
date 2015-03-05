@@ -1,5 +1,7 @@
 <resources>
 
+    <!--MAINLOFTTHEME-->
+
     <style name="LoftTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimaryDark">@color/green_dark</item>
         <item name="colorAccent">@color/green</item>
@@ -20,10 +22,10 @@
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
-    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">true</item>
-        <item name="color">@android:color/white</item>
-    </style>
+    <!--====================================================-->
+
+
+    <!--CONTAINERS STYLES-->
 
     <style name="Space">
         <item name="android:layout_weight">1</item>
@@ -46,6 +48,11 @@
         <item name="android:background">@drawable/android_app_back_main</item>
     </style>
 
+    <!--====================================================-->
+
+
+    <!--TEXTVIEW, EDITTEXT, LIST-->
+
     <style name="Text" parent="@android:style/TextAppearance" />
 
     <style name="Edit" parent="Text">
@@ -55,11 +62,24 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="ListText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeightSmall</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceListItemSmall</item>
+        <item name="android:textColor">@color/main_text</item>
+    </style>
+    <!--====================================================-->
+
+
+    <!--MAIN BUTTONS-->
     <style name="Button">
-        <item name="android:textColor">@color/button_text</item>
-        <item name="android:background">@drawable/button_bg</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:background">@drawable/button_bg</item>
     </style>
 
     <style name="RoundButton">
@@ -74,13 +94,53 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:text">+</item>
         <item name="android:textSize">20dp</item>
-   </style>
+    </style>
+
+    <!--====================================================-->
+
+
+    <!---NAVIGATION DRAWER-->
 
     <style name="DrawerView">
-     <item name="android:layout_width">match_parent</item>
-     <item name="android:layout_height">match_parent</item>
-     <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="DrawerListView">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:choiceMode">singleChoice</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:listSelector">@drawable/listview_selector</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
+    <style name="FrameDrawerlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/background</item>
+    </style>
+
+    <style name="DrawerListText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeightSmall</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceListItemSmall</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:textColor">@drawable/text_selector</item>
+
+    </style>
+
+    <!--====================================================-->
+
+    <!--DIALOG BOX-->
 
     <style name="DialogButtonCancel">
 
@@ -90,6 +150,11 @@
         <item name="android:text">ОТМЕНА</item>
         <item name="android:textColor">#7F7F7F</item>
 
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
     </style>
 
     <style name="DialogButtonOk">
@@ -105,4 +170,103 @@
 
     </style>
 
+    <style name="DialogBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">@dimen/padding_large</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:paddingTop">@dimen/padding_medium</item>
+
+    </style>
+
+    <style name="DialogTitleText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">@dimen/size_category_title</item>
+
+    </style>
+
+    <style name="DialogMainText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textColor">@color/main_text</item>
+    </style>
+
+    <!--====================================================-->
+
+    <!--CARDWIDGET STYLE-->
+    <style name="CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_card_view</item>
+        <item name="android:layout_margin">@dimen/small_margin</item>
+        <item name="android:layout_marginBottom">@dimen/small_margin</item>
+    </style>
+
+
+    <style name="TextContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:textColor">@color/main_text</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="NameField" parent="TextContent">
+        <item name="android:text">@string/card_name</item>
+        <item name="android:textSize">@dimen/card_medium_text</item>
+
+    </style>
+
+    <style name="DateField" parent="TextContent">
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:textSize">@dimen/card_medium_text</item>
+        <item name="android:text">@string/card_date</item>
+    </style>
+
+    <style name="SumField">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:text">@string/card_sum</item>
+        <item name="android:textColor">@color/main_text</item>
+        <item name="android:textSize">@dimen/card_medium_text</item>
+
+    </style>
+
+    <!--====================================================-->
+
+    <!--FRAGMENTS STYLES-->
+    <style name="ListFragmentView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:divider">@color/main_text</item>
+        <item name="android:dividerHeight">@dimen/list_divider</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+
+    </style>
+
+    <!--====================================================-->
+
+    <!--TOOLBAR STYLES-->
+    <style name="ToolbarView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/green</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+
+    </style>
+
+    <!--====================================================-->
 </resources>

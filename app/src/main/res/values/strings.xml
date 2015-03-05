@@ -27,4 +27,12 @@
     <string name="password_hint">Пароль</string>
     <string name="add_trans">Добавьте трату</string>
     <string name="add_category">Введите категорию</string>
+    <string name="hint_edittext_category">Одежда</string>
+    <string name="label_transaction_name">Название:</string>
+    <string name="hinteditTextName">Хлеб, зал, кофта и т.д.</string>
+    <string name="label_transaction_sum">Cумма:</string>
+    <string name="hint_edittextSum">500</string>
+    <string name="card_name">Название</string>
+    <string name="card_date">Дата</string>
+    <string name="card_sum">Сумма</string>
 </resources>

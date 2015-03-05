@@ -7,27 +7,16 @@
 
 
     <android.support.v4.widget.DrawerLayout
-        style="@style/DrawerView"
-        android:id="@+id/drawerLayout">
+        android:id="@+id/drawerLayout"
+        style="@style/DrawerView">
 
-    <FrameLayout
+        <FrameLayout
             android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background" />
+            style="@style/FrameDrawerlayout" />
 
         <ListView
-
             android:id="@+id/left_drawer"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/background"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:listSelector="@drawable/listview_selector"
-            android:longClickable="false" />
+            style="@style/DrawerListView" />
 
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
